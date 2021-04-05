@@ -49,8 +49,8 @@ Prerequisites:
 Download the tutorial code into a new directory:
 
 ```sh
-$ git clone https://github.com/jbarham/django-docker-heroku-tutorial.git djheroku
-$ cd djheroku
+$ git clone https://github.com/jbarham/django-docker-heroku-tutorial.git fizu
+$ cd fizu
 ```
 
 Run `docker-compose up -d --build` to download the Docker images and bring
@@ -161,7 +161,7 @@ The `web` service runs our Django app in a Docker container defined by our
 `Dockerfile`.
 
 We set the environment variable `DEBUG=1` which sets the `DEBUG` variable in the
-app's [`settings.py`](djheroku/settings.py) file to `True`.
+app's [`settings.py`](fizu/settings.py) file to `True`.
 
 The `volumes` section says that we want to map the current directory to the
 `/app` mountpoint in the Docker container. This means that any changes made to
@@ -196,7 +196,7 @@ have a web interface.
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-      POSTGRES_DB: djheroku
+      POSTGRES_DB: fizu
     volumes:
       - pgdata:/var/lib/postgresql/data/
 ```
@@ -235,7 +235,7 @@ list. In development `INTERNAL_IPS` is typically set to `['localhost', '127.0.0.
 However, services running in Docker Compose are assigned an ephemeral IP address
 so Django Debug Toolbar won't run. To enable Django Debug Toolbar in Docker
 Compose we instead used the following configuration option in our
-[`settings.py`](djheroku/settings.py):
+[`settings.py`](fizu/settings.py):
 
 ```python
 DEBUG_TOOLBAR_CONFIG = {
@@ -324,7 +324,7 @@ How our app should be run after it's been built is defined in a `Procfile`:
 ```
 release: python manage.py migrate
 
-web: gunicorn djheroku.wsgi --log-file -
+web: gunicorn fizu.wsgi --log-file -
 
 worker: python manage.py rqworker default
 ```

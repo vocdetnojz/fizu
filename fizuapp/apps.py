@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class KeygenConfig(AppConfig):
-    name = 'keygen'
+    name = 'fizuapp'
